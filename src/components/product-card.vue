@@ -1,40 +1,32 @@
 <template>
-  <v-card
-    class="mx-auto"
-    max-width="400"
-  >
-    <v-img
-      class="white--text align-end"
-      height="200px"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-    >
-      <v-card-title>Top 10 Australian beaches</v-card-title>
-    </v-img>
+  <v-col sm="4" xs="12" md="3" id="card">
+    <v-card max-width="400">
+      <v-img height="200px" :src="imgUrl">
+      </v-img>
+      <v-card-title>${{ price }}</v-card-title>
+      <v-card-subtitle class="pb-0">
+        {{ condition }}
+      </v-card-subtitle>
 
-    <v-card-subtitle class="pb-0">
-      Number 10
-    </v-card-subtitle>
+      <v-card-text class="text--primary">
+        <h5>{{ name }}</h5>
 
-    <v-card-text class="text--primary">
-      <div>Whitehaven Beach</div>
+        <div>{{ seller }}</div>
+      </v-card-text>
 
-      <div>Whitsunday Island, Whitsunday Islands</div>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn
-        color="orange"
-        text
-      >
-        Share
-      </v-btn>
-
-      <v-btn
-        color="orange"
-        text
-      >
-        Explore
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+      <v-card-actions>
+        <v-btn color="cyan darken-4" text> Ver más </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-col>
 </template>
+<script>
+export default {
+  props: ["imgUrl", "price", "condition", "name", "seller"],
+};
+</script>
+<style>
+  #card{
+    padding: 15px 10px;
+  }
+</style>
