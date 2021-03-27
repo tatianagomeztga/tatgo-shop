@@ -4,7 +4,7 @@
       <form>
         <v-text-field
           outlined
-          label="Buscar"
+          label="Presiona enter para buscar"
           append-icon="mdi-magnify"
           v-model="search"
           @keypress="enterSearch($event)"
@@ -111,6 +111,7 @@ export default {
         );
         //.then((respuesta) => (this.products = respuesta.data.results));
         if (datos.data.results.length > 0) {
+          this.search="Motorola G6"
           let total = await datos.data.paging.total;
           this.totalProducts = Math.ceil(total / this.limit);
           this.products = await datos.data.results;
@@ -133,10 +134,6 @@ export default {
       let nick = await user.data.nickname;
       console.log(nick);
       this.seller(nick);
-    },
-
-    paginate(currentPage) {
-      alert(currentPage);
     },
   },
 };

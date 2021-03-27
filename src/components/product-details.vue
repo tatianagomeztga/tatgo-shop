@@ -1,25 +1,23 @@
 <template>
   <v-dialog v-model="details" max-width="800px">
-    <v-card
-      color="#393e46">
+    <v-card>
       <v-img class="black--text align-end" height="300px" :src="imgUrl">
-        <v-card-title>
-          <span>{{ name }}</span>
-          <v-spacer></v-spacer>
-        </v-card-title>
       </v-img>
+      <v-card-title>
+        <span>{{ name }}</span>
+      </v-card-title>
       <v-card-subtitle class="pb-0 white--text">
         {{ condition }}
       </v-card-subtitle>
 
-      <v-card-text class="white--text">
-        <h5>{{ city }}</h5>
+      <v-card-text class="black--text">
+        <p>{{ city }}</p>
         
         <h2>${{ price }}</h2>
 
-        <h4>Cantidad disponible: {{ availableQ }}</h4>
-        <h4>Cantidad vendida: {{ soldQ }}</h4>
-        <h4>Vendedor: {{ seller }}</h4>
+        <p>Cantidad disponible: {{ availableQ }} <br>
+          Cantidad vendida: {{ soldQ }} <br>
+          Vendedor: {{ seller }}</p>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>

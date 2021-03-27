@@ -1,5 +1,5 @@
 <template>
-  <v-col sm="4" xs="12" md="2" id="card">
+  <v-col sm="4" xs="12" md="4" id="card">
     <v-card max-width="400">
       <v-img height="200px" :src="imgUrl"> </v-img>
       <v-card-title>${{ price }}</v-card-title>
