@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <v-content>
       <t-header></t-header>
       <router-view/>
@@ -21,4 +21,10 @@ export default{
 
 </script>
 <style>
+  #app{
+    background-image: url("assets/backgroundxl.png") !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+  }
 </style>

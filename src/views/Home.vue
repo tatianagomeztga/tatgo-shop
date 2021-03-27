@@ -19,12 +19,15 @@
         :price="product.price"
         :condition="product.condition"
         :name="product.title"
-        :seller="sellerName(product.seller.id)"
+        :city="product.seller_address.city.name"
+        :seller="product.seller.id"
+        :available="product.available_quantity"
+        :sold="product.sold_quantity"
       >
       </p-card>
     </v-row>
-    <div class="text-center" v-if="!isSearchSuccess">
-      <h4>{{ message }}</h4>
+    <div class="text-center" v-if="!isSearchSuccess" style="margin: 30px">
+      <h2>{{ message }}</h2>
     </div>
     <div class="text-center">
       <v-pagination
@@ -34,6 +37,7 @@
         :per-page="limit"
         @input="changePage"
         circle
+        color="#00adb5"
       ></v-pagination>
     </div>
   </v-container>
@@ -57,10 +61,9 @@ export default {
       isSearchSuccess: false,
       totalProducts: 0,
       products: [],
+      seller: [],
       currentPage: 1,
-      message: "No se encontraron resultados",
-
-      productSelect: {},
+      message: "Buscando...",
     };
   },
   mounted() {
@@ -69,7 +72,7 @@ export default {
   methods: {
     async getProducts(search, offset, limit) {
       if (this.search) {
-        //const url = `${this.baseUrl}${this.search}`;
+        this.message = "Buscando";
         try {
           let datos = await axios.get(this.baseUrl, {
             params: {
@@ -81,10 +84,11 @@ export default {
           if (datos.data.results.length > 0) {
             this.products = await datos.data.results;
             let total = await datos.data.paging.total;
-            this.totalProducts = Math.ceil(total/this.limit);
+            this.totalProducts = Math.ceil(total / this.limit);
             this.isSearchSuccess = true;
           } else {
             this.isSearchSuccess = false;
+            this.message = "No se encontraron resultados";
           }
         } catch (error) {
           console.log(error);
@@ -92,8 +96,8 @@ export default {
       }
     },
     async changePage(page) {
-      this.isSearchSuccess = false
-      this.offset = this.limit * (page - 1)
+      this.isSearchSuccess = false;
+      this.offset = this.limit * (page - 1);
       try {
         this.getProducts(this.search, this.offset, this.limit);
       } catch (error) {
@@ -108,11 +112,12 @@ export default {
         //.then((respuesta) => (this.products = respuesta.data.results));
         if (datos.data.results.length > 0) {
           let total = await datos.data.paging.total;
-          this.totalProducts = Math.ceil(total/this.limit);
+          this.totalProducts = Math.ceil(total / this.limit);
           this.products = await datos.data.results;
           this.isSearchSuccess = true;
         } else {
           this.isSearchSuccess = false;
+          this.message = "No se encontraron resultados";
         }
       } catch (error) {
         console.log(error);
@@ -120,7 +125,6 @@ export default {
     },
     enterSearch(event) {
       if (event.keyCode === 13) {
-        console.log(this.search);
         this.getProducts(this.search, this.offset, this.limit);
       }
     },
@@ -128,7 +132,7 @@ export default {
       let user = await axios.get(`https://api.mercadolibre.com/users/${id}`);
       let nick = await user.data.nickname;
       console.log(nick);
-      return nick;
+      this.seller(nick);
     },
 
     paginate(currentPage) {
