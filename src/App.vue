@@ -1,14 +1,23 @@
 <template>
   <v-app>
     <v-content>
-      <v-container>
-        <router-view/>
-      </v-container>
+      <t-header></t-header>
+      <router-view/>
+      <p-footer></p-footer>
     </v-content>
   </v-app>
 </template>
 
 <script>
+import topHeader from "@/components/top-header.vue";
+import footer from "@/components/footer.vue";
+
+export default{
+  components: {
+    "t-header": topHeader,
+    "p-footer": footer,
+  }
+}
 
 </script>
 <style>

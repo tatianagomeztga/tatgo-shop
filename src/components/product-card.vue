@@ -1,5 +1,5 @@
 <template>
-  <v-col sm="4" xs="12" md="3" id="card">
+  <v-col sm="4" xs="12" md="2" id="card">
     <v-card max-width="400">
       <v-img height="200px" :src="imgUrl">
       </v-img>
@@ -15,7 +15,8 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn color="cyan darken-4" text> Ver más </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn color="#00adb5" text> Ver más </v-btn>
       </v-card-actions>
     </v-card>
   </v-col>
